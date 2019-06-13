@@ -1,3 +1,13 @@
+
+/*
+ * BTRInput.h
+ *
+ * Arduino library for inputs control
+ *
+ * This code is released ito the public domain
+ *
+ */
+
 #ifndef BTRINPUT_H
 #define BTRINPUT_H
 
