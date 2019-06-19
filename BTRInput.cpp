@@ -114,4 +114,6 @@ void BTRInput::reset()
     stab_time = ctime;
     last_state_time = 0;
     switch_time = ctime;
+
+    clicked = false;
 }
