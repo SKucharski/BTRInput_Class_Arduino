@@ -15,8 +15,8 @@ void loop()
 {
     button.update();
 
-    bool state = digitalRead(LED_PIN);
-
-    if(button.isClicked())
+    if(button.isClicked()) {
+        bool state = digitalRead(LED_PIN);
         digitalWrite(LED_PIN, !state);
+    }
 }
