@@ -24,6 +24,8 @@ public:
     bool isTriggered();
     bool isReleased();
     bool isClicked();
+    bool wasClicked();
+    bool wasPressed();
     unsigned long getActiveStateTime();
     unsigned long getLastStateTime();
     void update();
@@ -37,6 +39,7 @@ private:
     bool stableHigh;
     bool prevStableHigh;
     bool clicked;
+    bool pressed;
     unsigned long ctime;
     unsigned long debounce_time;
     unsigned long switch_time;

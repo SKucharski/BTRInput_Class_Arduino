@@ -9,6 +9,8 @@ BTRInput::BTRInput(byte input_pin, bool pullup)
 
     isInputHigh = digitalRead(pin);
     stableHigh = isInputHigh;
+    clicked = false;
+    pressed = false;
 
     this->pullup = pullup;
 
@@ -43,11 +45,22 @@ bool BTRInput::isReleased()
     return ( stableHigh == pullup );
 }
 
-bool BTRInput::isClicked()
+bool BTRInput::isClicked() { return BTRInput::wasClicked(); }
+
+bool BTRInput::wasClicked()
 {
     if(clicked) {
         clicked = false;
+        return true;
+    }
 
+    return false;
+}
+
+bool BTRInput::wasPressed()
+{
+    if(pressed) {
+        pressed = false;
         return true;
     }
 
@@ -93,10 +106,16 @@ void BTRInput::update()
 
             if(prevStableHigh != stableHigh)
             {
-                if(isReleased())
+                if(isReleased()) {
                     clicked = true;
-                else if(clicked && isTriggered())
-                    clicked = false;
+                    if(pressed)
+                        pressed = false;
+                }
+                else if(isTriggered()) {
+                    pressed = true;
+                    if(clicked)
+                        clicked = false;
+                }
 
                 prevStableHigh = stableHigh;
             }
@@ -116,4 +135,5 @@ void BTRInput::reset()
     switch_time = ctime;
 
     clicked = false;
+    pressed = false;
 }
